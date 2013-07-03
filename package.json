@@ -4,7 +4,9 @@
   "dependencies": {
     "sag" : "*",
     "restify" : "*",
-    "moment" : "*"
+    "underscore" : "*",
+    "moment" : "*",
+    "request" : "*"
   },
   "engines": {
     "node": ">0.10.0"
