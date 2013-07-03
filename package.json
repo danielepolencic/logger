@@ -1,0 +1,12 @@
+{
+  "name": "Logger",
+  "version": "0.0.1",
+  "dependencies": {
+    "sag" : "*",
+    "restify" : "*",
+    "moment" : "*"
+  },
+  "engines": {
+    "node": ">0.10.0"
+  }
+}
