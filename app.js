@@ -17,8 +17,8 @@ encryption_handler = function(){
         var json = JSON.parse( new Buffer(req.params.e, 'base64').toString('ascii') )
         _.extend( req.params, json )
       } catch(e) {}
-      return next()
     }
+    return next()
   }
 
 }
@@ -74,6 +74,7 @@ server.get('/', function( req, res, next ){
 server.get('/pixel.png', function( req, res, next ){
   var image = req.params.image_url || 'http://www.golivetutor.com/download/spacer.gif'
   request(image).pipe(res)
+  return next()
 })
 
 server.listen( process.env.PORT || 8080 )
