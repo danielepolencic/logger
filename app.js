@@ -26,7 +26,7 @@ encryption_handler = function(){
 api_key_handler = function( api_key ){
 
   return function( req, res, next ){
-    if ( req.params.api_key === ~~ (process.env.API_KEY || api_key) ) {
+    if ( ~~ req.params.api_key === ~~ (process.env.API_KEY || api_key) ) {
       return next()
     } else {
       return next(new restify.InvalidArgumentError('API KEY not valid.'))
