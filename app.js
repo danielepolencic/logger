@@ -1,4 +1,4 @@
-var sag = require('sag').serverFromURL( process.env.CLOUDANT_URL || 'http://admin:admin@localhost' ),
+var couch = require('sag').serverFromURL( process.env.CLOUDANT_URL || 'http://admin:admin@localhost' ),
     restify = require('restify'),
     moment = require('moment'),
     _ = require('underscore'),
@@ -42,7 +42,7 @@ log_handler = function(){
 
     var data = _.extend( {}, req.params, {_id : now.toString()} );
 
-    sag.put({
+    couch.put({
       id : data._id,
       data : data,
       callback: function(resp, success) {
@@ -58,20 +58,21 @@ log_handler = function(){
 
 };
 
-sag.setDatabase('logs');
+couch.setDatabase('logs');
 server = restify.createServer();
 server.use(restify.queryParser());
 server.use(restify.jsonp());
-server.use(encryption_handler());
-server.use(api_key_handler('123'));
-server.use(log_handler());
 
 server.get('/', function( req, res, next ){
+  // render usage
+});
+
+server.get('/log', encryption_handler(), api_key_handler('123'), log_handler(), function( req, res, next ){
   res.json({ ok: true });
   return next();
 });
 
-server.get('/pixel.png', function( req, res, next ){
+server.get('/pixel.png', encryption_handler(), api_key_handler('123'), log_handler(), function( req, res, next ){
   var image = req.params.image_url || 'http://www.golivetutor.com/download/spacer.gif';
   request(image).pipe(res);
   return next();
