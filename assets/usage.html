@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Logger</title>
+</head>
+<body>
+  <h1>Logger</h1>
+  <h2>Usage:</h2>
+  <h3>GET /log</h3>
+  <p>Log a request. Parameters:</p>
+  <ul>
+    <li>api_key</li>
+  </ul>
+  <p>All the additional parameters are going to be recorded in the document.</p>
+  <h3>GET /pixel.png</h3>
+  <p>Log a request and server a pixel. The <em>image_url</em> parameter can override the default 1x1 gif pixel. Parameters:</p>
+  <ul>
+    <li>api_key</li>
+  </ul>
+  <p>All the additional parameters are going to be recorded in the document.</p>
+  <h3>Encryption</h3>
+  <p>All the data can be sent as a stringified and base64 encoded JSON using the parameter <em>e</em>. Example:</p>
+  <pre>/log?e=eyJhcGlfa2V5IjoxMjMsIm5hbWUiOiJkYW5pZWxlIn0=</pre>
+  <p>Where the encoded string is equivalent to <pre>{api_key:123,name:'daniele'}</pre></p>
+</body>
+</html>
+

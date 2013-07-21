@@ -3,6 +3,7 @@ var couch = require('sag').serverFromURL( process.env.CLOUDANT_URL || 'http://ad
     moment = require('moment'),
     _ = require('underscore'),
     request = require('request'),
+    fs = require('fs'),
     server,
     encryption_handler,
     api_key_handler,
@@ -64,7 +65,8 @@ server.use(restify.queryParser());
 server.use(restify.jsonp());
 
 server.get('/', function( req, res, next ){
-  // render usage
+  res.write( fs.readFileSync('./assets/usage.html', { encoding: 'utf-8' }) );
+  res.end();
 });
 
 server.get('/log', encryption_handler(), api_key_handler('123'), log_handler(), function( req, res, next ){
