@@ -1,4 +1,4 @@
-# Mailer
+# Logger
 Simple logging service.
 
 ## Features

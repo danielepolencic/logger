@@ -75,8 +75,12 @@ server.get('/log', encryption_handler(), api_key_handler('123'), log_handler(), 
 });
 
 server.get('/pixel.png', encryption_handler(), api_key_handler('123'), log_handler(), function( req, res, next ){
-  var image = req.params.image_url || 'http://www.golivetutor.com/download/spacer.gif';
-  request(image).pipe(res);
+  if( req.params.image_url ){
+    request(image).pipe(res);
+  } else {
+    res.writeHead(200,{'Content-Type': 'image/gif'});
+    fs.createReadStream('./assets/pixel.gif').pipe(res);
+  }
   return next();
 });
 
